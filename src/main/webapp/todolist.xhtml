@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+            <ui:define name="content">     
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1>#{todolistEditUI.todolist.name}</h1>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h:form id="persistform">
+
+                            <p>
+                                <h:inputText value="#{todolistEditUI.todo.title}" id="title" class="form-control" />
+                                <h:message for="title" class="label label-danger" />
+                            </p>
+                            <p>
+                                <h:commandButton action="#{todolistEditUI.addTodo()}" value="Add Todo" class="btn btn-success" >
+                                    <f:ajax execute="@form" render="list @form" onevent="addTodo" />
+                                </h:commandButton>
+                            </p>
+                        </h:form>
+                    </div>
+                </div>
+
+
+                <h:form id="list"> 
+                    <h:panelGroup  rendered="#{todolistEditUI.todolist.todos.size() > 0}">
+                        <div class="panel panel-default"  >
+                            <div class="panel-body">
+                                <div class="row" >
+                                    <div class="col-sm-12">
+                                        <h:dataTable  value="#{todolistEditUI.todolist.todos}" var="todo" id="todolist" class="table">
+
+                                            <h:column>
+                                                <div class="row todo todo-#{todo.completed}">
+                                                    <div class="col-sm-1">
+                                                        <h:selectBooleanCheckbox value="#{todo.completed}"  >
+                                                            <f:ajax render="list" execute="@this" listener="#{todolistEditUI.update()}" />
+                                                        </h:selectBooleanCheckbox>
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <div class="todo-title">
+                                                            <p>#{todo.title}</p>
+                                                            <p><button class="todo-title-edit">Edit</button></p>
+                                                        </div>
+                                                        <div class="todo-title-edit-body">
+                                                            <p><h:inputText value="#{todo.title}" class="form-control" /></p>
+
+                                                            <p><small>#{todo.created}</small></p>
+                                                            <p><small>Priority: #{todo.priority}</small></p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <h:commandLink action="#{todolistEditUI.removeTodo(todo)}" value="Remove" class="btn btn-danger btn-sm" >
+                                                            <f:ajax render="list" execute="@this" /> 
+
+                                                        </h:commandLink>
+                                                    </div>
+                                                </div>
+                                            </h:column>
+
+                                        </h:dataTable>
+
+                                        <h:commandButton action="#{todolistEditUI.update()}" value="Update" class="btn btn-danger btn-sm pull-right" >
+
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:form>
+
+
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 1, 2015, 2:52:17 PM
+    Author     : marcin
+*/
+
+body{
+    background: #fff;
+    padding:20px;
+}
+
+.list-group-item, .list-group-item:first-child, .list-group-item:last-child{
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border-bottom-style: none;
+    border-top-style: none;
+    border-right-style: none;
+    background: #FEFEFE;
+    margin-bottom: 1px;
+}
+
+.completed-false{
+    border-left:solid 5px orange;
+}
+
+.completed-true{
+    border-left:solid 5px green;
+}
+
+
+table tr td{
+    background: #FFF;
+}
+
+.panel h1{
+    margin: 0px;
+    padding: 10px 0px 10px 0px;
+    
+    
+}
+
+.todo-title-edit-body{
+   display: none;
+}
+
+.display-false{
+    display: none;
+}
+
+div.row.todo-true{
+    border:solid 2px green;
+}
+
+div.row.todo-false{
+    border:solid 2px orange;
+}
+
+div.row.todo{
+    padding: 10px;
+}
