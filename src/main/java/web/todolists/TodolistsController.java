@@ -23,9 +23,6 @@ public class TodolistsController implements Serializable{
 
     @Inject
     TodolistsEndpoint todoListsEndpoint;
-    
-  
-
     private Todolist todolist;
     private List<Todolist> allTodolists; 
     private Todo todo;
@@ -44,6 +41,8 @@ public class TodolistsController implements Serializable{
     }
     
     public void removeTodolist(Todolist todolist){
+        System.out.println("remove todolist: " + todolist);
+        System.out.println("todos: " + todolist.getTodos());
         todoListsEndpoint.remove(todolist);
     }
 
@@ -64,41 +63,11 @@ public class TodolistsController implements Serializable{
         this.todolist = tl;
         System.out.println("editTodolist: todolist: " + todolist);
         return "todolist";
-    }
-
+    } 
     
-
-    public void addTodo() {
-        System.out.println("addTodo: " + todo);      
-        System.out.println("todolist: " + todolist);
-        
-        todo.setCreated(new Date());
-        todolist.addTodo(todo);
-        todoListsEndpoint.update(todolist);      
-        
-        todo = new Todo();
-        
-        //return "todolist?id=" + todolist.getId();
-    }
-    
-    public void removeTodo(Todo todo){
-      
-        System.out.println("remove todolist todolist: " + todolist.getId());
-        todolist.removeTodo(todo);
-        todoListsEndpoint.update(todolist);            
-        ///return "todolist?id=" + todolist.getId();
-    }
-    
-    public void update(){
-        System.out.println("updateing.....");
-        System.out.println("todolist in update: " + todolist);
-        todoListsEndpoint.update(todolist);
-        todolist = todoListsEndpoint.find(todolist.getId());
-        // return "todolist?id=" + todolist.getId();
-    }
-    
-    public void update(Todolist tododolist){
-        System.out.println("update todolist: " + tododolist);
+    public void update(Todolist todolist){
+        System.out.println("update todolist: " + todolist);
+        System.out.println("todos: " + todolist.getTodos());
         todoListsEndpoint.update(todolist);
     }
 

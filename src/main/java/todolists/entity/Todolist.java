@@ -51,9 +51,6 @@ public class Todolist implements Serializable {
     public Todolist() {
         this.created =  new Date();
     }
-    
-    
-    
 
     public Long getId() {
         return id;
@@ -72,7 +69,7 @@ public class Todolist implements Serializable {
         this.name = name;
     }
 
-    public List<Todo> getTodos() {
+    public List<Todo> getTodos() {       
         return todos;
     }
 

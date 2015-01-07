@@ -17,31 +17,29 @@ import todolists.entity.Todolist;
  */
 @Stateless
 public class TodolistsEndpoint {
-    
+
     @PersistenceContext
     EntityManager em;
-    
-    public void create(Todolist todolist){
+
+    public void create(Todolist todolist) {
         em.persist(todolist);
     }
-    
-    public void remove(Todolist todolist){
+
+    public void remove(Todolist todolist) {
         Todolist merge = em.merge(todolist);
         em.remove(merge);
     }
-    
-    public List<Todolist> findAllTodolists(){
+
+    public List<Todolist> findAllTodolists() {
         return em.createQuery("Select t From Todolist t ORDER BY t.created DESC", Todolist.class).getResultList();
     }
-    
-    public Todolist find(Long todolistId){
+
+    public Todolist find(Long todolistId) {
         return em.find(Todolist.class, todolistId);
     }
-    
-    public void update(Todolist todolist){
+
+    public void update(Todolist todolist) {     
         em.merge(todolist);
     }
-    
-   
-    
+
 }
