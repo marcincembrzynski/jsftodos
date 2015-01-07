@@ -16,7 +16,7 @@
                     <div class="panel-heading">
                         <h:form>
                             <p>Todolist Name <h:message for="name" class="label label-danger" /> </p>
-                            
+
                             <p><h:inputText value="#{todolistsController.todolist.name}" class="form-control" id="name" /></p>
                             <p><h:commandButton action="#{todolistsController.create()}" class="btn btn-success" value="Create" >
                                     <f:ajax execute="@form" render="@form list" onevent="handleEvent" />
@@ -27,28 +27,32 @@
                 </div>
 
 
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h:form id="list">
-                            <h:dataTable value="#{todolistsController.allTodolists}" var="todolist" class="table">
 
-                                <h:column>
-                                    <h:inputText value="#{todolist.name}" class="form-control" />
-                                </h:column>
+                <h:form id="list">
+                    <h:panelGroup rendered="#{todolistsController.allTodolists.size() > 0}">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h:dataTable value="#{todolistsController.allTodolists}" var="todolist" class="table">
 
-                                <h:column>
-                                    <h:commandButton action="#{todolistEditUI.editTodolist(todolist)}" value="Edit" class="btn btn-success" />
-                                </h:column>
-                                <h:column>
-                                    <h:commandButton action="#{todolistsController.removeTodolist(todolist)}" value="Remove" />
-                                </h:column>
-                                <h:column>
-                                    <h:commandButton action="#{todolistsController.update(todolist)}" value="Update" />
-                                </h:column>
-                            </h:dataTable>
-                        </h:form>
-                    </div>
-                </div>
+                                    <h:column>
+                                        <h:inputText value="#{todolist.name}" class="form-control" />
+                                    </h:column>
+
+                                    <h:column>
+                                        <h:commandButton action="#{todolistEditUI.editTodolist(todolist)}" value="Edit" class="btn btn-success" />
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton action="#{todolistsController.removeTodolist(todolist)}" value="Remove" />
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton action="#{todolistsController.update(todolist)}" value="Update" />
+                                    </h:column>
+
+                                </h:dataTable>        
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:form>
 
             </ui:define>
 
